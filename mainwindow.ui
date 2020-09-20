@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>894</width>
+    <height>719</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Labirynt</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>894</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuLabyrinth">
+    <property name="title">
+     <string>Labirynt</string>
+    </property>
+    <widget class="QMenu" name="menuSzukaj_wyj_cia">
+     <property name="title">
+      <string>Szukaj wyjścia</string>
+     </property>
+     <addaction name="actionBlindfold_Right"/>
+     <addaction name="actionBlindfold_Left"/>
+     <addaction name="actionSi_owo_bruteforce"/>
+     <addaction name="actionWave_propagation"/>
+     <addaction name="actionTime_table"/>
+    </widget>
+    <addaction name="actionNew"/>
+    <addaction name="menuSzukaj_wyj_cia"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Ustawienia</string>
+    </property>
+    <widget class="QMenu" name="menuJ_zyk_menu">
+     <property name="title">
+      <string>Język menu</string>
+     </property>
+     <addaction name="actionPolish"/>
+     <addaction name="actionEnglish"/>
+    </widget>
+    <addaction name="menuJ_zyk_menu"/>
+   </widget>
+   <addaction name="menuLabyrinth"/>
+   <addaction name="menuSettings"/>
+  </widget>
+  <action name="actionNew">
+   <property name="text">
+    <string>Generuj nowy</string>
+   </property>
+  </action>
+  <action name="actionPolish">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Polish</string>
+   </property>
+  </action>
+  <action name="actionEnglish">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>English</string>
+   </property>
+  </action>
+  <action name="actionBlindfold_Right">
+   <property name="text">
+    <string>Po omacku (prawa ręka)</string>
+   </property>
+  </action>
+  <action name="actionSi_owo_bruteforce">
+   <property name="text">
+    <string>Siłowo (bruteforce)</string>
+   </property>
+  </action>
+  <action name="actionBlindfold_Left">
+   <property name="text">
+    <string>Po omacku (lewa ręka)</string>
+   </property>
+  </action>
+  <action name="actionWave_propagation">
+   <property name="text">
+    <string>Propagacja fali</string>
+   </property>
+  </action>
+  <action name="actionTime_table">
+   <property name="text">
+    <string>Tablica czasu</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Zamknij</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
