@@ -6,7 +6,7 @@ Project assumptions:
 - The object is blind (it's dark in the maze)
 - writing and testing exit searching algorithms
 
-<img src="./projectScreenImage/Labyrinth02.png" width=350 />
+<img src="./projectScreenImage/Labyrinth02.png" width=500 />
 
 Creating algorithms:
  - [ ] Labyrinth generation

@@ -2,12 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <language.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow, public Language
 {
     Q_OBJECT
 
@@ -17,5 +18,12 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Language *language;
+    void refreshLanguage();
+
+private slots:
+    void clickMenuPolish();
+    void clickMenuEnglish();
+    void clickMenuQuit();
 };
 #endif // MAINWINDOW_H
