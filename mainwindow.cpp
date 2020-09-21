@@ -1,11 +1,17 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QImage>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    //--- set start parameters
+    globalX = 20;
+    globalY = 20;
+    globalWidth = 32;
 
     //--- connect menu
     connect(ui->actionPolish,SIGNAL(triggered()),this, SLOT(clickMenuPolish()));
@@ -14,10 +20,35 @@ MainWindow::MainWindow(QWidget *parent)
 
     //--- set default language
     language = new Language(Language::Polish);
+
+    //--- paint / create palete
+    QWidget::setMinimumHeight(globalY*(globalWidth+1)+20+ui->menubar->height());
+    QWidget::setMaximumHeight(globalY*(globalWidth+1)+20+ui->menubar->height());
+    QWidget::setMinimumWidth(globalX*(globalWidth+1)+20);
+    QWidget::setMaximumWidth(globalX*(globalWidth+1)+20);
+
+    image = new QImage(globalX*(globalWidth+1),globalY*(globalWidth+1),QImage::Format_RGB32);
+    image -> fill(QColor(217,217,217));
+    paintOnImage = new QPainter;
+    paintOnImage->begin(image);
+
+    paintOnImage->drawRect(10,10,32,32);
+}
+
+void MainWindow::paintEvent(QPaintEvent *)
+{
+    QPainter painter;
+    painter.begin(this);
+    painter.drawImage(10,10 + ui->menubar->height(),*image);
+    painter.end();
 }
 
 MainWindow::~MainWindow()
 {
+    paintOnImage->end();
+    delete image;
+    delete paintOnImage;
+
     delete language;
     delete ui;
 }
