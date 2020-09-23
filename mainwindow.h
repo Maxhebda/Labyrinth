@@ -30,6 +30,7 @@ private:
     byte globalX;           //number of cells Y
     byte globalY;           //number of cells Y
     byte globalWidth;       //ceil width
+    void refreshWindowsSize();
 
 protected:
     void paintEvent(QPaintEvent *);

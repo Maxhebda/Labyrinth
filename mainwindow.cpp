@@ -21,11 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     //--- set default language
     language = new Language(Language::Polish);
 
-    //--- paint / create palete
-    QWidget::setMinimumHeight(globalY*(globalWidth+1)+20+ui->menubar->height());
-    QWidget::setMaximumHeight(globalY*(globalWidth+1)+20+ui->menubar->height());
-    QWidget::setMinimumWidth(globalX*(globalWidth+1)+20);
-    QWidget::setMaximumWidth(globalX*(globalWidth+1)+20);
+    refreshWindowsSize();   //set windows size - auto width and height
 
     image = new QImage(globalX*(globalWidth+1),globalY*(globalWidth+1),QImage::Format_RGB32);
     image -> fill(QColor(217,217,217));
@@ -108,4 +104,13 @@ void MainWindow::refreshLanguage()
     ui->actionSi_owo_bruteforce->setText(language->l("forcefully (bruteforce)"));
     ui->actionWave_propagation->setText(language->l("Wave propagation"));
     ui->actionTime_table->setText(language->l("Time table"));
+}
+
+void MainWindow::refreshWindowsSize()
+{
+    //--- paint / create palete
+    QWidget::setMinimumHeight(globalY*(globalWidth+1)+20+ui->menubar->height());
+    QWidget::setMaximumHeight(globalY*(globalWidth+1)+20+ui->menubar->height());
+    QWidget::setMinimumWidth(globalX*(globalWidth+1)+20);
+    QWidget::setMaximumWidth(globalX*(globalWidth+1)+20);
 }
