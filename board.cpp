@@ -44,26 +44,14 @@ void Board::setCell(int y, int x, Cell cell)
 
 void Board::generateFrame()
 {
-    Cell * tmpCell1 = new Cell();
-    Cell * tmpCell2 = new Cell();
-    tmpCell1->setWall(Cell::UP);
-    tmpCell2->setWall(Cell::DOWN);
     for (int x = 0; x < width; x++)
     {
-        board[0][x] = *tmpCell1;
-        board[height - 1][x] = *tmpCell2;
+        board[0][x].setWall(Cell::UP);
+        board[height - 1][x].setWall(Cell::DOWN);
     }
-
-    tmpCell1->delWall(Cell::UP);
-    tmpCell2->delWall(Cell::DOWN);
-    tmpCell1->setWall(Cell::LEFT);
-    tmpCell2->setWall(Cell::RIGHT);
     for (int y = 0; y < height; y++)
     {
-        board[y][0] = *tmpCell1;
-        board[y][width - 1] = *tmpCell2;
+        board[y][0].setWall(Cell::LEFT);
+        board[y][width - 1].setWall(Cell::RIGHT);
     }
-
-    delete tmpCell1;
-    delete tmpCell2;
 }

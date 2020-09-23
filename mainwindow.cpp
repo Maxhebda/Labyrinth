@@ -22,12 +22,14 @@ MainWindow::MainWindow(QWidget *parent)
     language = new Language(Language::Polish);
 
     refreshWindowsSize();   //set windows size - auto width and height
-    board->generateFrame();
 
     paintOnImage = new QPainter;
     paintOnImage->begin(image);
+    //--- draw main frame
+    paintOnImage->drawRect(0,0,globalX*globalWidth+1,globalY*globalWidth+1);
 
-    paintOnImage->drawRect(10,10,32,32);
+    board->generateFrame();
+    drawBoard();
 }
 
 void MainWindow::paintEvent(QPaintEvent *)
@@ -84,8 +86,6 @@ void MainWindow::clickMenuEnglish()
 
 void MainWindow::clickMenuQuit()
 {
-    board->generateFrame();
-    drawBoard();
     //close();
 }
 
@@ -110,12 +110,12 @@ void MainWindow::refreshLanguage()
 void MainWindow::refreshWindowsSize()
 {
     //--- paint / create palete
-    QWidget::setMinimumHeight(globalY*(globalWidth+1)+20+ui->menubar->height());
-    QWidget::setMaximumHeight(globalY*(globalWidth+1)+20+ui->menubar->height());
-    QWidget::setMinimumWidth(globalX*(globalWidth+1)+20);
-    QWidget::setMaximumWidth(globalX*(globalWidth+1)+20);
+    QWidget::setMinimumHeight(globalY*globalWidth+22+ui->menubar->height());
+    QWidget::setMaximumHeight(globalY*globalWidth+22+ui->menubar->height());
+    QWidget::setMinimumWidth(globalX*globalWidth+22);
+    QWidget::setMaximumWidth(globalX*globalWidth+22);
 
-    image =  new QImage(globalX*(globalWidth+1),globalY*(globalWidth+1),QImage::Format_RGB32);
+    image =  new QImage(globalX*globalWidth+2,globalY*globalWidth+2,QImage::Format_RGB32);
     image -> fill(QColor(217,217,217));
 
     //--- create my board
@@ -139,10 +139,18 @@ void MainWindow::drawCell(int y, int x)
 
  if (board->getCell(y,x).getWall(Cell::UP))
  {
-     paintOnImage->drawLine(x*globalWidth,y*globalWidth,x*globalWidth + globalWidth-1, y*globalWidth);
+     paintOnImage->drawLine(x*globalWidth+1,y*globalWidth+1, x*globalWidth + globalWidth, y*globalWidth+1);
  }
  if (board->getCell(y,x).getWall(Cell::DOWN))
  {
-     paintOnImage->drawLine(x*globalWidth, y*globalWidth + globalWidth-1, x*globalWidth + globalWidth-1, y*globalWidth + globalWidth-1);
+     paintOnImage->drawLine(x*globalWidth+1, y*globalWidth + globalWidth, x*globalWidth + globalWidth, y*globalWidth + globalWidth);
+ }
+ if (board->getCell(y,x).getWall(Cell::RIGHT))
+ {
+     paintOnImage->drawLine(x*globalWidth + globalWidth, y*globalWidth+1,x*globalWidth + globalWidth, y*globalWidth + globalWidth);
+ }
+ if (board->getCell(y,x).getWall(Cell::LEFT))
+ {
+     paintOnImage->drawLine(x*globalWidth+1, y*globalWidth+1, x*globalWidth+1, y*globalWidth + globalWidth);
  }
 }
