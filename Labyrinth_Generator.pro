@@ -16,13 +16,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    ceil.cpp \
+    board.cpp \
+    cell.cpp \
     language.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
-    ceil.h \
+    board.h \
+    cell.h \
     language.h \
     mainwindow.h
 

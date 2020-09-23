@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <language.h>
+#include <cell.h>
+#include <board.h>
+#include <QList>
 
 //drawing libraries
 #include <QImage>
@@ -25,12 +28,15 @@ private:
     Ui::MainWindow *ui;
     QImage * image;
     QPainter * paintOnImage;
-    Language *language;
+    Language * language;
     void refreshLanguage();
     byte globalX;           //number of cells Y
     byte globalY;           //number of cells Y
     byte globalWidth;       //ceil width
     void refreshWindowsSize();
+    void drawBoard();
+    void drawCell(int y, int x);
+    Board * board;          //myMainBoard
 
 protected:
     void paintEvent(QPaintEvent *);

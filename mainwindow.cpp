@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QImage>
+#include <QtDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,9 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
     language = new Language(Language::Polish);
 
     refreshWindowsSize();   //set windows size - auto width and height
+    board->generateFrame();
 
-    image = new QImage(globalX*(globalWidth+1),globalY*(globalWidth+1),QImage::Format_RGB32);
-    image -> fill(QColor(217,217,217));
     paintOnImage = new QPainter;
     paintOnImage->begin(image);
 
@@ -44,7 +43,7 @@ MainWindow::~MainWindow()
     paintOnImage->end();
     delete image;
     delete paintOnImage;
-
+    delete board;
     delete language;
     delete ui;
 }
@@ -85,7 +84,9 @@ void MainWindow::clickMenuEnglish()
 
 void MainWindow::clickMenuQuit()
 {
-    close();
+    board->generateFrame();
+    drawBoard();
+    //close();
 }
 
 void MainWindow::refreshLanguage()
@@ -113,4 +114,35 @@ void MainWindow::refreshWindowsSize()
     QWidget::setMaximumHeight(globalY*(globalWidth+1)+20+ui->menubar->height());
     QWidget::setMinimumWidth(globalX*(globalWidth+1)+20);
     QWidget::setMaximumWidth(globalX*(globalWidth+1)+20);
+
+    image =  new QImage(globalX*(globalWidth+1),globalY*(globalWidth+1),QImage::Format_RGB32);
+    image -> fill(QColor(217,217,217));
+
+    //--- create my board
+    board = new Board(globalY, globalX);
+}
+
+void MainWindow::drawBoard()
+{
+    for (int y = 0; y < globalY; y++)
+    {
+        for (int x = 0; x < globalX; x++)
+        {
+            drawCell(y,x);
+        }
+    }
+    repaint();
+}
+
+void MainWindow::drawCell(int y, int x)
+{
+
+ if (board->getCell(y,x).getWall(Cell::UP))
+ {
+     paintOnImage->drawLine(x*globalWidth,y*globalWidth,x*globalWidth + globalWidth-1, y*globalWidth);
+ }
+ if (board->getCell(y,x).getWall(Cell::DOWN))
+ {
+     paintOnImage->drawLine(x*globalWidth, y*globalWidth + globalWidth-1, x*globalWidth + globalWidth-1, y*globalWidth + globalWidth-1);
+ }
 }

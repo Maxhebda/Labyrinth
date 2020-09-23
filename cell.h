@@ -1,11 +1,11 @@
-#ifndef CEIL_H
-#define CEIL_H
+#ifndef Cell_H
+#define Cell_H
 #include <QList>
 
-class Ceil
+class Cell
 {
 public:
-    Ceil();
+    Cell();
     enum TypeWall{ UP = 0, RIGHT, DOWN, LEFT};
     void clear();
     bool isVisited();
@@ -18,6 +18,7 @@ public:
     QList<uint8_t> getData();
     void setData(QList<uint8_t>);
     void clearData();
+    void checkTheLock();                          //lock object. all 4 walls. square
 
 private:
     int y;                  //cell position
@@ -27,4 +28,4 @@ private:
     bool visited;           //have already visited
 };
 
-#endif // CEIL_H
+#endif // Cell_H
