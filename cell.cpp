@@ -10,7 +10,7 @@ void Cell::clear()
     visited = false;
     for(uint8_t i = 0; i < 4 ; i++)
     {
-        walls[i] = false;
+        walls = 0;
     }
     clearData();
 }
@@ -25,31 +25,30 @@ void Cell::checkVisited()
     visited = true;
 }
 
-int Cell::getX()
+uint8_t Cell::getX()
 {
     return  x;
 }
 
-int Cell::getY()
+uint8_t Cell::getY()
 {
     return y;
 }
 
 bool Cell::getWall(TypeWall typewall)
 {
-    return walls[typewall];
+    return (typewall & walls) == typewall ? true : false;        //AND bit   :  if 0110 && 0010 = 0010 then true
 }
 
-void Cell::setWall(TypeWall typewall)
+void Cell::setWall(TypeWall maskTypewall)
 {
-    walls[typewall] = true;
+    walls = walls | maskTypewall;                                   //OR bit   : = 0110 || 0001 = 0111
 }
 
-void Cell::delWall(TypeWall typewall)
+void Cell::delWall(TypeWall maskTypewall)
 {
-    walls[typewall] = false;
+    walls = walls & !maskTypewall;                                 //ADN !bit  : = 0110 && !(0010) = 0110 && 1101 = 0100
 }
-
 
 QList<uint8_t> Cell::getData()
 {
@@ -70,6 +69,6 @@ void Cell::checkTheLock()
 {
     for(uint8_t i = 0; i < 4 ; i++)
     {
-        walls[i] = true;
+        walls = 15;
     }
 }

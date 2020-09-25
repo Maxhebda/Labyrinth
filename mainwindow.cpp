@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     board->generateFrame();
     drawBoard();
+    //qDebug() << (6 & 4);
 }
 
 void MainWindow::paintEvent(QPaintEvent *)

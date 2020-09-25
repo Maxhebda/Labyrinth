@@ -8,8 +8,17 @@ Project assumptions:
 
 <img src="./projectScreenImage/Labyrinth02.png" width=500 />
 
+#### Project under construction
+finished:
+- [x] menu in several languages (language class)
+- [x] cell skeleton (we work with bits, not bytes)
+- [ ] labyrinth generation algorithm by the method of straight lines
+- [ ] labyrinth generation algorithm by recursive method.
+- [x] board skeleton and drawing
+- [ ] solving algorithms
+
 Creating algorithms:
- - [ ] Labyrinth generation
+ - [ ] Labyrinth generation (straight lines & recursive method)
  - [ ] Solving: Blintfold (right hand)
  - [ ] Solving: Blinfold (left hand)
  - [ ] Solving: Brute Force
