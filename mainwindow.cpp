@@ -6,12 +6,13 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    srand(time(NULL));
     ui->setupUi(this);
 
     //--- set start parameters
-    globalX = 20;
-    globalY = 20;
-    globalWidth = 32;
+    globalX = 40;
+    globalY = 30;
+    globalWidth = 20;
 
     //--- connect menu
     connect(ui->actionPolish,SIGNAL(triggered()),this, SLOT(clickMenuPolish()));
@@ -21,16 +22,19 @@ MainWindow::MainWindow(QWidget *parent)
     //--- set default language
     language = new Language(Language::Polish);
 
-    refreshWindowsSize();   //set windows size - auto width and height
+    //-------------------------------- start palete
+    refreshWindowsSize();                   //set windows size - auto width and height
+    //-------------------------------- start palete
 
     paintOnImage = new QPainter;
     paintOnImage->begin(image);
     //--- draw main frame
     paintOnImage->drawRect(0,0,globalX*globalWidth+1,globalY*globalWidth+1);
 
-    board->generateFrame();
+//    board->generateFrame();
+    board->generateTheBeginningOfTheLabyrinth();
+    board->generateMaze_methodDFS(0,0);
     drawBoard();
-    //qDebug() << (6 & 4);
 }
 
 void MainWindow::paintEvent(QPaintEvent *)
@@ -110,6 +114,11 @@ void MainWindow::refreshLanguage()
 
 void MainWindow::refreshWindowsSize()
 {
+    //--- create new board;
+    board = new Board(globalY, globalX);    // create my board
+    globalY = board->getHeight();           //set default
+    globalX = board->getWidth();
+
     //--- paint / create palete
     QWidget::setMinimumHeight(globalY*globalWidth+22+ui->menubar->height());
     QWidget::setMaximumHeight(globalY*globalWidth+22+ui->menubar->height());
@@ -118,16 +127,13 @@ void MainWindow::refreshWindowsSize()
 
     image =  new QImage(globalX*globalWidth+2,globalY*globalWidth+2,QImage::Format_RGB32);
     image -> fill(QColor(217,217,217));
-
-    //--- create my board
-    board = new Board(globalY, globalX);
 }
 
 void MainWindow::drawBoard()
 {
-    for (int y = 0; y < globalY; y++)
+    for (uint8_t y = 0; y < globalY; y++)
     {
-        for (int x = 0; x < globalX; x++)
+        for (uint8_t x = 0; x < globalX; x++)
         {
             drawCell(y,x);
         }
@@ -135,7 +141,7 @@ void MainWindow::drawBoard()
     repaint();
 }
 
-void MainWindow::drawCell(int y, int x)
+void MainWindow::drawCell(uint8_t y, uint8_t x)
 {
 
  if (board->getCell(y,x).getWall(Cell::UP))

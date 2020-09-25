@@ -1,4 +1,5 @@
 #include "cell.h"
+#include <QDebug>
 
 Cell::Cell()
 {
@@ -47,7 +48,7 @@ void Cell::setWall(TypeWall maskTypewall)
 
 void Cell::delWall(TypeWall maskTypewall)
 {
-    walls = walls & !maskTypewall;                                 //ADN !bit  : = 0110 && !(0010) = 0110 && 1101 = 0100
+    walls -= maskTypewall;                                 //ADN !bit  : = 0110 && !(0010) = 0110 && 1101 = 0100
 }
 
 QList<uint8_t> Cell::getData()

@@ -5,15 +5,24 @@
 class Board
 {
 public:
-    Board(int height, int width);
+    Board(uint8_t height, uint8_t width);
     void clear();
-    Cell getCell(int y, int x);
-    void setCell(int y, int x, Cell cell);
+    Cell getCell(uint8_t y, uint8_t x);
+    void setCell(uint8_t y, uint8_t x, Cell cell);
+    void dellWallinCell(uint8_t y, uint8_t x, Cell::TypeWall wall);
+    void setWallinCell(uint8_t y, uint8_t x, Cell::TypeWall wall);
+    void generateTheBeginningOfTheLabyrinth();
+    void checkCellAsVisited(uint8_t y, uint8_t x);
+    uint8_t getWidth();
+    uint8_t getHeight();
+
+    //-- maze generating functions
+    void generateMaze_methodDFS(uint8_t yStart, uint8_t xStart);
 
 private:
     Cell board[100][200];   //ymax = 100, xmax = 200
-    int width;
-    int height;
+    uint8_t width;
+    uint8_t height;
 
 public: //temporary is public
     void generateFrame();

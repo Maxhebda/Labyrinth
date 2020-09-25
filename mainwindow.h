@@ -35,7 +35,7 @@ private:
     byte globalWidth;       //ceil width
     void refreshWindowsSize();
     void drawBoard();
-    void drawCell(int y, int x);
+    void drawCell(uint8_t y, uint8_t x);
     Board * board;          //myMainBoard
 
 protected:
