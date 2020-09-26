@@ -44,5 +44,8 @@ void Language::load()
     lData.push_back(Equivalent("Blindfold (left hand)","Po omacku (lewa ręka)"));
     lData.push_back(Equivalent("forcefully (bruteforce)","Siłowo (bruteforce)"));
     lData.push_back(Equivalent("Wave propagation","Propagacja fali"));
-    lData.push_back(Equivalent("time table","Tablica czasu"));
+    lData.push_back(Equivalent("Time table","Tablica czasu"));
+    lData.push_back(Equivalent("Normal maze","Normalny labirynt"));
+    lData.push_back(Equivalent("Horizontal maze","Poziomy labirynt"));
+    lData.push_back(Equivalent("Vertical maze","Pionowy labirynt"));
 }

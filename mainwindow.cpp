@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionPolish,SIGNAL(triggered()),this, SLOT(clickMenuPolish()));
     connect(ui->actionEnglish,SIGNAL(triggered()),this, SLOT(clickMenuEnglish()));
     connect(ui->actionQuit,SIGNAL(triggered()),this, SLOT(clickMenuQuit()));
+    connect(ui->actionNormal_maze,SIGNAL(triggered()),this, SLOT(clickMenuGenerateNormalMaze()));
+    connect(ui->actionHorizontal_maze,SIGNAL(triggered()),this, SLOT(clickMenuGenerateHorizontalMaze()));
+    connect(ui->actionVertical_maze,SIGNAL(triggered()),this, SLOT(clickMenuGenerateVerticalMaze()));
 
     //--- set default language
     language = new Language(Language::Polish);
@@ -25,11 +28,6 @@ MainWindow::MainWindow(QWidget *parent)
     //-------------------------------- start palete
     refreshWindowsSize();                   //set windows size - auto width and height
     //-------------------------------- start palete
-
-    paintOnImage = new QPainter;
-    paintOnImage->begin(image);
-    //--- draw main frame
-    paintOnImage->drawRect(0,0,globalX*globalWidth+1,globalY*globalWidth+1);
 
 //    board->generateFrame();
     board->generateTheBeginningOfTheLabyrinth();
@@ -94,6 +92,33 @@ void MainWindow::clickMenuQuit()
     //close();
 }
 
+void MainWindow::clickMenuGenerateNormalMaze()
+{
+    refreshWindowsSize();
+    board->clear();
+    board->generateTheBeginningOfTheLabyrinth();
+    board->generateMaze_methodDFS(0,0);
+    drawBoard();
+}
+
+void MainWindow::clickMenuGenerateHorizontalMaze()
+{
+    refreshWindowsSize();
+    board->clear();
+    board->generateTheBeginningOfTheLabyrinth();
+    board->generateMaze_methodDFS_horizontal(rand()%(globalY-1),rand()%(globalX-1));
+    drawBoard();
+}
+
+void MainWindow::clickMenuGenerateVerticalMaze()
+{
+    refreshWindowsSize();
+    board->clear();
+    board->generateTheBeginningOfTheLabyrinth();
+    board->generateMaze_methodDFS_vertical(rand()%(globalY-1),rand()%(globalX-1));
+    drawBoard();
+}
+
 void MainWindow::refreshLanguage()
 {
     QWidget::setWindowTitle(language->l("Labyrinth"));
@@ -102,7 +127,7 @@ void MainWindow::refreshLanguage()
     ui->menuJ_zyk_menu->setTitle(language->l("Menu language"));
     ui->menuSettings->setTitle(language->l("Settings"));
     ui->menuLabyrinth->setTitle(language->l("Labyrinth"));
-    ui->actionNew->setText(language->l("Generate new"));
+    ui->menuGenerateNew->setTitle(language->l("Generate new"));
     ui->actionQuit->setText(language->l("Quit"));
     ui->menuSzukaj_wyj_cia->setTitle(language->l("Find the exit"));
     ui->actionBlindfold_Right->setText(language->l("Blindfold (right hand)"));
@@ -110,6 +135,9 @@ void MainWindow::refreshLanguage()
     ui->actionSi_owo_bruteforce->setText(language->l("forcefully (bruteforce)"));
     ui->actionWave_propagation->setText(language->l("Wave propagation"));
     ui->actionTime_table->setText(language->l("Time table"));
+    ui->actionNormal_maze->setText(language->l("Normal maze"));
+    ui->actionHorizontal_maze->setText(language->l("Horizontal maze"));
+    ui->actionVertical_maze->setText(language->l("Vertical maze"));
 }
 
 void MainWindow::refreshWindowsSize()
@@ -127,6 +155,11 @@ void MainWindow::refreshWindowsSize()
 
     image =  new QImage(globalX*globalWidth+2,globalY*globalWidth+2,QImage::Format_RGB32);
     image -> fill(QColor(217,217,217));
+
+    paintOnImage = new QPainter;
+    paintOnImage->begin(image);
+    //--- draw main frame
+    paintOnImage->drawRect(0,0,globalX*globalWidth+1,globalY*globalWidth+1);
 }
 
 void MainWindow::drawBoard()

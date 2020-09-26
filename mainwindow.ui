@@ -37,7 +37,16 @@
      <addaction name="actionWave_propagation"/>
      <addaction name="actionTime_table"/>
     </widget>
-    <addaction name="actionNew"/>
+    <widget class="QMenu" name="menuGenerateNew">
+     <property name="title">
+      <string>Generuj nowy</string>
+     </property>
+     <addaction name="actionNormal_maze"/>
+     <addaction name="separator"/>
+     <addaction name="actionHorizontal_maze"/>
+     <addaction name="actionVertical_maze"/>
+    </widget>
+    <addaction name="menuGenerateNew"/>
     <addaction name="menuSzukaj_wyj_cia"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
@@ -58,11 +67,6 @@
    <addaction name="menuLabyrinth"/>
    <addaction name="menuSettings"/>
   </widget>
-  <action name="actionNew">
-   <property name="text">
-    <string>Generuj nowy</string>
-   </property>
-  </action>
   <action name="actionPolish">
    <property name="checkable">
     <bool>true</bool>
@@ -110,6 +114,21 @@
   <action name="actionQuit">
    <property name="text">
     <string>Zamknij</string>
+   </property>
+  </action>
+  <action name="actionNormal_maze">
+   <property name="text">
+    <string>Normalny labirynt</string>
+   </property>
+  </action>
+  <action name="actionHorizontal_maze">
+   <property name="text">
+    <string>Poziomy labirynt</string>
+   </property>
+  </action>
+  <action name="actionVertical_maze">
+   <property name="text">
+    <string>Pionowy labirynt</string>
    </property>
   </action>
  </widget>

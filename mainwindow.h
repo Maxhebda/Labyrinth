@@ -45,5 +45,8 @@ private slots:
     void clickMenuPolish();
     void clickMenuEnglish();
     void clickMenuQuit();
+    void clickMenuGenerateNormalMaze();
+    void clickMenuGenerateHorizontalMaze();
+    void clickMenuGenerateVerticalMaze();
 };
 #endif // MAINWINDOW_H

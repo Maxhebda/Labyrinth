@@ -18,6 +18,8 @@ public:
 
     //-- maze generating functions
     void generateMaze_methodDFS(uint8_t yStart, uint8_t xStart);
+    void generateMaze_methodDFS_horizontal(uint8_t yStart, uint8_t xStart);
+    void generateMaze_methodDFS_vertical(uint8_t yStart, uint8_t xStart);
 
 private:
     Cell board[100][200];   //ymax = 100, xmax = 200

@@ -1,6 +1,8 @@
 #include "board.h"
 #include <QDebug>
 
+uint8_t rDirectory;
+
 Board::Board(uint8_t height, uint8_t width)
 {
     if (width > 200)       //set default
@@ -94,7 +96,6 @@ void Board::generateTheBeginningOfTheLabyrinth()
     }
 }
 
-uint8_t rDirectory;
 void Board::generateMaze_methodDFS(uint8_t y, uint8_t x)
 {
     //-- set the cell as visited
@@ -166,6 +167,206 @@ void Board::generateMaze_methodDFS(uint8_t y, uint8_t x)
                         board[y][x].delWall(Cell::LEFT);
                         board[y][x-1].delWall(Cell::RIGHT);
                         generateMaze_methodDFS(y,x-1);
+                    }
+                }
+                break;
+            }
+        }
+    }
+}
+
+void Board::generateMaze_methodDFS_horizontal(uint8_t y, uint8_t x)
+{
+    //-- set the cell as visited
+    board[y][x].checkVisited();
+
+    //-- random direction permutation
+    uint8_t tabDirectory[4] = {0,1,2,3};
+    uint8_t directionPermutation[4];
+
+    //--- random horizontal direction left/right in 50%
+    if (rand()%2==0)
+    {
+        rDirectory = rand()%2;
+        if (rDirectory==0)
+        {
+            directionPermutation[0] = 1;
+            directionPermutation[1] = 3;
+        }
+        else
+        {
+            directionPermutation[0] = 3;
+            directionPermutation[1] = 1;
+        }
+        tabDirectory[1] = tabDirectory[2];
+    }
+    else
+    {
+        rDirectory = rand()%4;
+        directionPermutation[0] = tabDirectory[rDirectory];
+        if (rDirectory!=3) tabDirectory[rDirectory] = tabDirectory[3];
+        rDirectory = rand()%3;
+        directionPermutation[1] = tabDirectory[rDirectory];
+        if (rDirectory!=2) tabDirectory[rDirectory] = tabDirectory[2];
+    }
+
+    rDirectory = rand()%2;
+    directionPermutation[2] = tabDirectory[rDirectory];
+    if (rDirectory==0) directionPermutation[3] = tabDirectory[1];
+    else directionPermutation[3] = tabDirectory[0];
+
+    //-- check/go permutation function
+    for (int r = 0; r < 4; r++) {
+        switch (directionPermutation[r])
+        {
+            case 0 :    //up
+            {
+                if ( y > 0 )
+                {
+                    if (board[y-1][x].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::UP);
+                        board[y-1][x].delWall(Cell::DOWN);
+                        generateMaze_methodDFS_horizontal(y-1,x);
+                    }
+                }
+                break;
+            }
+            case 1 :    //rigth
+            {
+                if ( x < width - 1 )
+                {
+                    if (board[y][x+1].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::RIGHT);
+                        board[y][x+1].delWall(Cell::LEFT);
+                        generateMaze_methodDFS_horizontal(y,x+1);
+                    }
+                }
+                break;
+            }
+            case 2 :    //down
+            {
+                if ( y < height - 1 )
+                {
+                    if (board[y+1][x].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::DOWN);
+                        board[y+1][x].delWall(Cell::UP);
+                        generateMaze_methodDFS_horizontal(y+1,x);
+                    }
+                }
+                break;
+            }
+            case 3 :    //left
+            {
+                if ( x > 0 )
+                {
+                    if (board[y][x-1].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::LEFT);
+                        board[y][x-1].delWall(Cell::RIGHT);
+                        generateMaze_methodDFS_horizontal(y,x-1);
+                    }
+                }
+                break;
+            }
+        }
+    }
+}
+
+void Board::generateMaze_methodDFS_vertical(uint8_t y, uint8_t x)
+{
+    //-- set the cell as visited
+    board[y][x].checkVisited();
+
+    //-- random direction permutation
+    uint8_t tabDirectory[4] = {0,1,2,3};
+    uint8_t directionPermutation[4];
+
+    //--- random vertical direction up/down in 50%
+    if (rand()%2==0)
+    {
+        rDirectory = rand()%2;
+        if (rDirectory==0)
+        {
+            directionPermutation[0] = 0;
+            directionPermutation[1] = 2;
+        }
+        else
+        {
+            directionPermutation[0] = 2;
+            directionPermutation[1] = 0;
+        }
+        tabDirectory[0] = tabDirectory[3];
+    }
+    else
+    {
+        rDirectory = rand()%4;
+        directionPermutation[0] = tabDirectory[rDirectory];
+        if (rDirectory!=3) tabDirectory[rDirectory] = tabDirectory[3];
+        rDirectory = rand()%3;
+        directionPermutation[1] = tabDirectory[rDirectory];
+        if (rDirectory!=2) tabDirectory[rDirectory] = tabDirectory[2];
+    }
+
+    rDirectory = rand()%2;
+    directionPermutation[2] = tabDirectory[rDirectory];
+    if (rDirectory==0) directionPermutation[3] = tabDirectory[1];
+    else directionPermutation[3] = tabDirectory[0];
+
+    //-- check/go permutation function
+    for (int r = 0; r < 4; r++) {
+        switch (directionPermutation[r])
+        {
+            case 0 :    //up
+            {
+                if ( y > 0 )
+                {
+                    if (board[y-1][x].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::UP);
+                        board[y-1][x].delWall(Cell::DOWN);
+                        generateMaze_methodDFS_vertical(y-1,x);
+                    }
+                }
+                break;
+            }
+            case 1 :    //rigth
+            {
+                if ( x < width - 1 )
+                {
+                    if (board[y][x+1].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::RIGHT);
+                        board[y][x+1].delWall(Cell::LEFT);
+                        generateMaze_methodDFS_vertical(y,x+1);
+                    }
+                }
+                break;
+            }
+            case 2 :    //down
+            {
+                if ( y < height - 1 )
+                {
+                    if (board[y+1][x].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::DOWN);
+                        board[y+1][x].delWall(Cell::UP);
+                        generateMaze_methodDFS_vertical(y+1,x);
+                    }
+                }
+                break;
+            }
+            case 3 :    //left
+            {
+                if ( x > 0 )
+                {
+                    if (board[y][x-1].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::LEFT);
+                        board[y][x-1].delWall(Cell::RIGHT);
+                        generateMaze_methodDFS_vertical(y,x-1);
                     }
                 }
                 break;

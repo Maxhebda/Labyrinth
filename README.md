@@ -13,12 +13,15 @@ finished:
 - [x] menu in several languages (language class)
 - [x] cell skeleton (we work with bits, not bytes)
 - [ ] labyrinth generation algorithm by the method of straight lines
-- [x] labyrinth generation algorithm by DFS method [Link](https://pl.qwe.wiki/wiki/Depth-first_search)
+- [x] labyrinth generation algorithm by DFS method  [Link](https://pl.qwe.wiki/wiki/Depth-first_search)
+    - normal maze
+    - hozirontal maze
+    - vertical maze
 - [x] board skeleton and drawing
 - [ ] solving algorithms
 
 Creating algorithms:
- - [ ] Labyrinth generation (straight lines & recursive method)
+ - [ ] Labyrinth generation (straight lines & recursive method) (20% completed)
  - [ ] Solving: Blintfold (right hand)
  - [ ] Solving: Blinfold (left hand)
  - [ ] Solving: Brute Force
@@ -36,6 +39,5 @@ tools:
 * https://pl.qwe.wiki -> [Wiki](https://pl.qwe.wiki/wiki/Maze_generation_algorithm)
 ---
 ### Screens
-<img src="./projectScreenImage/Labyrinth01.png" width=300 /> 
-<img src="./projectScreenImage/Labyrinth02.png" width=300 /> 
-<img src="./projectScreenImage/Labyrinth03.png" width=300 /> 
+<img src="./projectScreenImage/Labyrinth01.png" width=250 />  <img src="./projectScreenImage/Labyrinth02.png" width=250 />  <img src="./projectScreenImage/Labyrinth03.png" width=250 /> 
+<img src="./projectScreenImage/Labyrinth04.png" width=250 />
