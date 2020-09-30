@@ -10,9 +10,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     //--- set start parameters
-    globalX = 40;
-    globalY = 30;
-    globalWidth = 20;
+    globalX = 10;
+    globalY = 10;
+    globalWidth = 100;
 
     //--- connect menu
     connect(ui->actionPolish,SIGNAL(triggered()),this, SLOT(clickMenuPolish()));
@@ -117,6 +117,11 @@ void MainWindow::clickMenuGenerateVerticalMaze()
     board->generateTheBeginningOfTheLabyrinth();
     board->generateMaze_methodDFS_vertical(rand()%(globalY-1),rand()%(globalX-1));
     drawBoard();
+}
+
+void MainWindow::clickMenuMazeSetings()
+{
+
 }
 
 void MainWindow::refreshLanguage()

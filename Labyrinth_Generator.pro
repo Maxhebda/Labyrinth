@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     board.cpp \
     cell.cpp \
+    dialog.cpp \
     language.cpp \
     main.cpp \
     mainwindow.cpp
@@ -25,10 +26,12 @@ SOURCES += \
 HEADERS += \
     board.h \
     cell.h \
+    dialog.h \
     language.h \
     mainwindow.h
 
 FORMS += \
+    dialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.

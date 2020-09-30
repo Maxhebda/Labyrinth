@@ -45,6 +45,7 @@ private slots:
     void clickMenuPolish();
     void clickMenuEnglish();
     void clickMenuQuit();
+    void clickMenuMazeSetings();
     void clickMenuGenerateNormalMaze();
     void clickMenuGenerateHorizontalMaze();
     void clickMenuGenerateVerticalMaze();
