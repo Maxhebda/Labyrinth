@@ -63,6 +63,7 @@
      <addaction name="actionEnglish"/>
     </widget>
     <addaction name="menuJ_zyk_menu"/>
+    <addaction name="actionMaze_settings"/>
    </widget>
    <addaction name="menuLabyrinth"/>
    <addaction name="menuSettings"/>
@@ -129,6 +130,11 @@
   <action name="actionVertical_maze">
    <property name="text">
     <string>Pionowy labirynt</string>
+   </property>
+  </action>
+  <action name="actionMaze_settings">
+   <property name="text">
+    <string>Ustawienia labiryntu</string>
    </property>
   </action>
  </widget>

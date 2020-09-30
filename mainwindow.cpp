@@ -8,11 +8,15 @@ MainWindow::MainWindow(QWidget *parent)
 {
     srand(time(NULL));
     ui->setupUi(this);
+    ui_mazeSetings = new Dialog(this);
 
     //--- set start parameters
     globalX = 10;
     globalY = 10;
-    globalWidth = 100;
+    globalWidth = 30;
+    setglobalX = globalX;
+    setglobalY = globalY;
+    setglobalWidth = globalWidth;
 
     //--- connect menu
     connect(ui->actionPolish,SIGNAL(triggered()),this, SLOT(clickMenuPolish()));
@@ -21,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionNormal_maze,SIGNAL(triggered()),this, SLOT(clickMenuGenerateNormalMaze()));
     connect(ui->actionHorizontal_maze,SIGNAL(triggered()),this, SLOT(clickMenuGenerateHorizontalMaze()));
     connect(ui->actionVertical_maze,SIGNAL(triggered()),this, SLOT(clickMenuGenerateVerticalMaze()));
+    connect(ui->actionMaze_settings,SIGNAL(triggered()),this, SLOT(clickMenuMazeSetings()));
 
     //--- set default language
     language = new Language(Language::Polish);
@@ -50,6 +55,7 @@ MainWindow::~MainWindow()
     delete paintOnImage;
     delete board;
     delete language;
+    delete ui_mazeSetings;
     delete ui;
 }
 
@@ -89,7 +95,7 @@ void MainWindow::clickMenuEnglish()
 
 void MainWindow::clickMenuQuit()
 {
-    //close();
+    close();
 }
 
 void MainWindow::clickMenuGenerateNormalMaze()
@@ -121,7 +127,16 @@ void MainWindow::clickMenuGenerateVerticalMaze()
 
 void MainWindow::clickMenuMazeSetings()
 {
+   ui_mazeSetings->setstart(setglobalY,setglobalX,setglobalWidth);
+   ui_mazeSetings->show();
+}
 
+void MainWindow::getGlobalSettings()
+{
+    if (ui_mazeSetings==NULL) return;
+    setglobalX = ui_mazeSetings->getX();
+    setglobalY = ui_mazeSetings->getY();
+    setglobalWidth = ui_mazeSetings->getWidth();
 }
 
 void MainWindow::refreshLanguage()
@@ -143,13 +158,25 @@ void MainWindow::refreshLanguage()
     ui->actionNormal_maze->setText(language->l("Normal maze"));
     ui->actionHorizontal_maze->setText(language->l("Horizontal maze"));
     ui->actionVertical_maze->setText(language->l("Vertical maze"));
+    ui->actionMaze_settings->setText(language->l("Maze settings"));
+
+    if (ui_mazeSetings!=NULL)
+    {
+        ui_mazeSetings->setLanguage(language->l("Maze settings"), language->l("Size"), language->l("Cell in a row"),language->l("Cell in a column"),language->l("Cell width"),language->l("Cancel"),language->l("The changes will be visible after re-generating the maze"));
+    }
 }
 
 void MainWindow::refreshWindowsSize()
 {
+    //--- refresh maze size
+    getGlobalSettings(); // read setting on (dialog) setings form
+    globalX = setglobalX;
+    globalY = setglobalY;
+    globalWidth = setglobalWidth;
+
     //--- create new board;
     board = new Board(globalY, globalX);    // create my board
-    globalY = board->getHeight();           //set default
+    globalY = board->getHeight();           // set default
     globalX = board->getWidth();
 
     //--- paint / create palete

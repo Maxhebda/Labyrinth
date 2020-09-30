@@ -48,4 +48,11 @@ void Language::load()
     lData.push_back(Equivalent("Normal maze","Normalny labirynt"));
     lData.push_back(Equivalent("Horizontal maze","Poziomy labirynt"));
     lData.push_back(Equivalent("Vertical maze","Pionowy labirynt"));
+    lData.push_back(Equivalent("Maze settings","Ustawienia labiryntu"));
+    lData.push_back(Equivalent("Size","Rozmiar"));
+    lData.push_back(Equivalent("Cell in a row","Komórek w rzędzie"));
+    lData.push_back(Equivalent("Cell in a column","Komórek w kolumnie"));
+    lData.push_back(Equivalent("Cell width","Szerokość komórki"));
+    lData.push_back(Equivalent("Cancel","Anuluj"));
+    lData.push_back(Equivalent("The changes will be visible after re-generating the maze","Zmiany będą widoczne po ponownym wygenerowaniu labiryntu"));
 }
