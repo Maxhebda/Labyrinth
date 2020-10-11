@@ -27,7 +27,7 @@ public:
 
 private:
     Ui::MainWindow * ui;
-    Dialog * ui_mazeSetings;//menu Maze setings
+    Dialog * ui_mazeSettings;//menu Maze setings
     QImage * image;
     QPainter * paintOnImage;
     Language * language;

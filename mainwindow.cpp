@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     srand(time(NULL));
     ui->setupUi(this);
-    ui_mazeSetings = new Dialog(this);
+    ui_mazeSettings = new Dialog(this);
 
     //--- set start parameters
     globalX = 10;
@@ -55,7 +55,7 @@ MainWindow::~MainWindow()
     delete paintOnImage;
     delete board;
     delete language;
-    delete ui_mazeSetings;
+    delete ui_mazeSettings;
     delete ui;
 }
 
@@ -127,16 +127,20 @@ void MainWindow::clickMenuGenerateVerticalMaze()
 
 void MainWindow::clickMenuMazeSetings()
 {
-   ui_mazeSetings->setstart(setglobalY,setglobalX,setglobalWidth);
-   ui_mazeSetings->show();
+    if (ui_mazeSettings->isChangeOfSettings())
+    {
+        getGlobalSettings();
+    }
+    ui_mazeSettings->setstart(setglobalY,setglobalX,setglobalWidth);
+    ui_mazeSettings->show();
 }
 
 void MainWindow::getGlobalSettings()
 {
-    if (ui_mazeSetings==NULL) return;
-    setglobalX = ui_mazeSetings->getX();
-    setglobalY = ui_mazeSetings->getY();
-    setglobalWidth = ui_mazeSetings->getWidth();
+    if (ui_mazeSettings==NULL) return;
+    setglobalX = ui_mazeSettings->getX();
+    setglobalY = ui_mazeSettings->getY();
+    setglobalWidth = ui_mazeSettings->getWidth();
 }
 
 void MainWindow::refreshLanguage()
@@ -160,9 +164,9 @@ void MainWindow::refreshLanguage()
     ui->actionVertical_maze->setText(language->l("Vertical maze"));
     ui->actionMaze_settings->setText(language->l("Maze settings"));
 
-    if (ui_mazeSetings!=NULL)
+    if (ui_mazeSettings!=NULL)
     {
-        ui_mazeSetings->setLanguage(language->l("Maze settings"), language->l("Size"), language->l("Cell in a row"),language->l("Cell in a column"),language->l("Cell width"),language->l("Cancel"),language->l("The changes will be visible after re-generating the maze"));
+        ui_mazeSettings->setLanguage(language->l("Maze settings"), language->l("Size"), language->l("Cell in a row"),language->l("Cell in a column"),language->l("Cell width"),language->l("Cancel"),language->l("The changes will be visible after re-generating the maze"),language->l("Window size"));
     }
 }
 
