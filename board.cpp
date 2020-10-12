@@ -375,6 +375,242 @@ void Board::generateMaze_methodDFS_vertical(uint8_t y, uint8_t x)
     }
 }
 
+void Board::generateMaze_methodDFS_spiral(uint8_t y, uint8_t x, int8_t directory, uint8_t l, uint8_t lmax)
+{
+    //-- set the cell as visited
+    board[y][x].checkVisited();
+
+    //-- random direction permutation
+    uint8_t tabDirectory[4] = {0,1,2,3};
+    uint8_t directionPermutation[4];
+
+    if (rand()%40<37)
+    {
+        if (l<lmax)
+        {
+            l+=2;
+            if (directory==1)
+            {
+                directionPermutation[0] = 0;
+                directionPermutation[1] = 1;
+                directionPermutation[2] = 2;
+                directionPermutation[3] = 3;
+            }
+            else
+            if (directory==2)
+            {
+                directionPermutation[0] = 1;
+                directionPermutation[1] = 2;
+                directionPermutation[2] = 3;
+                directionPermutation[3] = 0;
+            }
+            else
+            if (directory==3)
+            {
+                directionPermutation[0] = 2;
+                directionPermutation[1] = 3;
+                directionPermutation[2] = 0;
+                directionPermutation[3] = 1;
+            }
+            else
+            if (directory==4)
+            {
+                directionPermutation[0] = 3;
+                directionPermutation[1] = 0;
+                directionPermutation[2] = 1;
+                directionPermutation[3] = 2;
+            }
+            else
+            if (directory==-1)
+            {
+                directionPermutation[0] = 0;
+                directionPermutation[1] = 3;
+                directionPermutation[2] = 2;
+                directionPermutation[3] = 1;
+            }
+            else
+            if (directory==-2)
+            {
+                directionPermutation[0] = 1;
+                directionPermutation[1] = 0;
+                directionPermutation[2] = 3;
+                directionPermutation[3] = 2;
+            }
+            else
+            if (directory==-3)
+            {
+                directionPermutation[0] = 2;
+                directionPermutation[1] = 1;
+                directionPermutation[2] = 0;
+                directionPermutation[3] = 3;
+            }
+            else
+            if (directory==-4)
+            {
+                directionPermutation[0] = 3;
+                directionPermutation[1] = 2;
+                directionPermutation[2] = 1;
+                directionPermutation[3] = 0;
+            }
+
+        }
+        else
+        {
+            l=0;
+            lmax-=2;
+            if (lmax < 4)
+            {
+                lmax = 40;
+                directory = rand()%2==0?-1:1;
+                directory = directory * rand()%4;
+            }
+            if (directory==1)
+            {
+                directory = 2;
+                directionPermutation[0] = 1;
+                directionPermutation[1] = 2;
+                directionPermutation[2] = 3;
+                directionPermutation[3] = 0;
+            }
+            else
+            if (directory==2)
+            {
+                directory = 3;
+                directionPermutation[0] = 2;
+                directionPermutation[1] = 3;
+                directionPermutation[2] = 0;
+                directionPermutation[3] = 1;
+            }
+            else
+            if (directory==3)
+            {
+                directory = 4;
+                directionPermutation[0] = 3;
+                directionPermutation[1] = 0;
+                directionPermutation[2] = 1;
+                directionPermutation[3] = 2;
+            }
+            else
+            if (directory==4)
+            {
+                directory = 1;
+                directionPermutation[0] = 0;
+                directionPermutation[1] = 1;
+                directionPermutation[2] = 2;
+                directionPermutation[3] = 3;
+            }
+            else
+            if (directory==-1)
+            {
+                directory = -2;
+                directionPermutation[0] = 3;
+                directionPermutation[1] = 2;
+                directionPermutation[2] = 1;
+                directionPermutation[3] = 0;
+            }
+            else
+            if (directory==-2)
+            {
+                directory = -3;
+                directionPermutation[0] = 0;
+                directionPermutation[1] = 3;
+                directionPermutation[2] = 2;
+                directionPermutation[3] = 1;
+            }
+            else
+            if (directory==-3)
+            {
+                directory = -4;
+                directionPermutation[0] = 1;
+                directionPermutation[1] = 0;
+                directionPermutation[2] = 3;
+                directionPermutation[3] = 2;
+            }
+            else
+            if (directory==-4)
+            {
+                directory = -1;
+                directionPermutation[0] = 2;
+                directionPermutation[1] = 1;
+                directionPermutation[2] = 0;
+                directionPermutation[3] = 3;
+            }
+        }
+    }
+    else
+    {
+        rDirectory = rand()%4;
+        directionPermutation[0] = tabDirectory[rDirectory];
+        if (rDirectory!=3) tabDirectory[rDirectory] = tabDirectory[3];
+        rDirectory = rand()%3;
+        directionPermutation[1] = tabDirectory[rDirectory];
+        if (rDirectory!=2) tabDirectory[rDirectory] = tabDirectory[2];
+        rDirectory = rand()%2;
+        directionPermutation[2] = tabDirectory[rDirectory];
+        if (rDirectory==0) directionPermutation[3] = tabDirectory[1];
+        else directionPermutation[3] = tabDirectory[0];
+    }
+
+    //-- check/go permutation function
+    for (int r = 0; r < 4; r++) {
+        switch (directionPermutation[r])
+        {
+            case 0 :    //up
+            {
+                if ( y > 0 )
+                {
+                    if (board[y-1][x].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::UP);
+                        board[y-1][x].delWall(Cell::DOWN);
+                        generateMaze_methodDFS_spiral(y-1,x,directory,l,lmax);
+                    }
+                }
+                break;
+            }
+            case 1 :    //rigth
+            {
+                if ( x < width - 1 )
+                {
+                    if (board[y][x+1].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::RIGHT);
+                        board[y][x+1].delWall(Cell::LEFT);
+                        generateMaze_methodDFS_spiral(y,x+1,directory,l,lmax);
+                    }
+                }
+                break;
+            }
+            case 2 :    //down
+            {
+                if ( y < height - 1 )
+                {
+                    if (board[y+1][x].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::DOWN);
+                        board[y+1][x].delWall(Cell::UP);
+                        generateMaze_methodDFS_spiral(y+1,x,directory,l,lmax);
+                    }
+                }
+                break;
+            }
+            case 3 :    //left
+            {
+                if ( x > 0 )
+                {
+                    if (board[y][x-1].isVisited()==false)
+                    {
+                        board[y][x].delWall(Cell::LEFT);
+                        board[y][x-1].delWall(Cell::RIGHT);
+                        generateMaze_methodDFS_spiral(y,x-1,directory,l,lmax);
+                    }
+                }
+                break;
+            }
+        }
+    }
+}
+
 uint8_t Board::getWidth()
 {
     return this->width;

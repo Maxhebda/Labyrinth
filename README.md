@@ -18,6 +18,7 @@ finished:
     - normal maze
     - hozirontal maze
     - vertical maze
+- [x] labyrinth generation algorithm - spiral, cyclones (my algorithm)
 - [x] board skeleton and drawing
 - [ ] solving algorithms
 

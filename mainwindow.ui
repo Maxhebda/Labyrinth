@@ -45,6 +45,7 @@
      <addaction name="separator"/>
      <addaction name="actionHorizontal_maze"/>
      <addaction name="actionVertical_maze"/>
+     <addaction name="actionSpiral"/>
     </widget>
     <addaction name="menuGenerateNew"/>
     <addaction name="menuSzukaj_wyj_cia"/>
@@ -135,6 +136,11 @@
   <action name="actionMaze_settings">
    <property name="text">
     <string>Ustawienia labiryntu</string>
+   </property>
+  </action>
+  <action name="actionSpiral">
+   <property name="text">
+    <string>Spiralny labirynt, cyklony</string>
    </property>
   </action>
  </widget>

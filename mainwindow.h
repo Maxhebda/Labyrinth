@@ -57,5 +57,6 @@ private slots:
     void clickMenuGenerateNormalMaze();
     void clickMenuGenerateHorizontalMaze();
     void clickMenuGenerateVerticalMaze();
+    void clickMenuGenerateSpiralMaze();
 };
 #endif // MAINWINDOW_H

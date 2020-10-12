@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionNormal_maze,SIGNAL(triggered()),this, SLOT(clickMenuGenerateNormalMaze()));
     connect(ui->actionHorizontal_maze,SIGNAL(triggered()),this, SLOT(clickMenuGenerateHorizontalMaze()));
     connect(ui->actionVertical_maze,SIGNAL(triggered()),this, SLOT(clickMenuGenerateVerticalMaze()));
+    connect(ui->actionSpiral,SIGNAL(triggered()),this, SLOT(clickMenuGenerateSpiralMaze()));
     connect(ui->actionMaze_settings,SIGNAL(triggered()),this, SLOT(clickMenuMazeSetings()));
 
     //--- set default language
@@ -125,6 +126,15 @@ void MainWindow::clickMenuGenerateVerticalMaze()
     drawBoard();
 }
 
+void MainWindow::clickMenuGenerateSpiralMaze()
+{
+    refreshWindowsSize();
+    board->clear();
+    board->generateTheBeginningOfTheLabyrinth();
+    board->generateMaze_methodDFS_spiral(rand()%((globalY / 2)-1)+(globalY / 2),rand()%((globalX / 2)-1)+(globalX / 2),2,0,20);
+    drawBoard();
+}
+
 void MainWindow::clickMenuMazeSetings()
 {
     if (ui_mazeSettings->isChangeOfSettings())
@@ -163,6 +173,7 @@ void MainWindow::refreshLanguage()
     ui->actionHorizontal_maze->setText(language->l("Horizontal maze"));
     ui->actionVertical_maze->setText(language->l("Vertical maze"));
     ui->actionMaze_settings->setText(language->l("Maze settings"));
+    ui->actionSpiral->setText(language->l("Spiral maze, cyclones"));
 
     if (ui_mazeSettings!=NULL)
     {
