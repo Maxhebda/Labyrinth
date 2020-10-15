@@ -41,5 +41,5 @@ tools:
 * https://pl.qwe.wiki -> [Wiki](https://pl.qwe.wiki/wiki/Maze_generation_algorithm)
 ---
 ### Screens
-<img src="./projectScreenImage/Labyrinth05.png" width=250 />  <img src="./projectScreenImage/Labyrinth02.png" width=250 />  <img src="./projectScreenImage/Labyrinth03.png" width=250 /> 
-<img src="./projectScreenImage/Labyrinth04.png" width=250 />  <img src="./projectScreenImage/Labyrinth01.png" width=250 />
+<img src="./projectScreenImage/Labyrinth05.png" width=250 />  <img src="./projectScreenImage/Labyrinth06.png" width=250 />  <img src="./projectScreenImage/Labyrinth03.png" width=250 /> 
+<img src="./projectScreenImage/Labyrinth04.png" width=250 />  <img src="./projectScreenImage/Labyrinth01.png" width=250 />  <img src="./projectScreenImage/Labyrinth02.png" width=250 />
