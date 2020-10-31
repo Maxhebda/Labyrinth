@@ -57,4 +57,5 @@ void Language::load()
     lData.push_back(Equivalent("The changes will be visible after re-generating the maze","Zmiany będą widoczne po ponownym wygenerowaniu labiryntu"));
     lData.push_back(Equivalent("Window size","Rozmiar okna"));
     lData.push_back(Equivalent("Spiral maze, cyclones","Spiralny labirynt, cyklony"));
+    lData.push_back(Equivalent("Straight lines","Proste linie"));
 }

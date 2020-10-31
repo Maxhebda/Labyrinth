@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionVertical_maze,SIGNAL(triggered()),this, SLOT(clickMenuGenerateVerticalMaze()));
     connect(ui->actionSpiral,SIGNAL(triggered()),this, SLOT(clickMenuGenerateSpiralMaze()));
     connect(ui->actionMaze_settings,SIGNAL(triggered()),this, SLOT(clickMenuMazeSetings()));
+    connect(ui->actionStraight_lines,SIGNAL(triggered()),this, SLOT(clickMenuGenerateStraightLine()));
 
     //--- set default language
     language = new Language(Language::Polish);
@@ -135,6 +136,15 @@ void MainWindow::clickMenuGenerateSpiralMaze()
     drawBoard();
 }
 
+void MainWindow::clickMenuGenerateStraightLine()
+{
+    refreshWindowsSize();
+    board->clear();
+    board->generateFrame();
+    board->generateMaze_methodStraightLines(0, 0, globalY - 1, globalX - 1, true);
+    drawBoard();
+}
+
 void MainWindow::clickMenuMazeSetings()
 {
     if (ui_mazeSettings->isChangeOfSettings())
@@ -174,6 +184,7 @@ void MainWindow::refreshLanguage()
     ui->actionVertical_maze->setText(language->l("Vertical maze"));
     ui->actionMaze_settings->setText(language->l("Maze settings"));
     ui->actionSpiral->setText(language->l("Spiral maze, cyclones"));
+    ui->actionStraight_lines->setText(language->l("Straight lines"));
 
     if (ui_mazeSettings!=NULL)
     {

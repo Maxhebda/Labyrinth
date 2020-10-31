@@ -611,6 +611,25 @@ void Board::generateMaze_methodDFS_spiral(uint8_t y, uint8_t x, int8_t directory
     }
 }
 
+void Board::generateMaze_methodStraightLines(uint8_t yStart, uint8_t xStart, uint8_t yEnd, uint8_t xEnd, bool direction)
+{
+    uint8_t y;
+    uint8_t hole;
+    if (direction)
+    {
+        y = yStart + (yEnd - yStart) / 2;
+        hole = rand()%(yStart + (yEnd - yStart)) + 1;
+        for(uint8_t x = xStart; x < xEnd + 1; x++)
+        {
+            if (x != hole)
+            {
+                board[y][x].setWall(Cell::DOWN);
+                board[y+1][x].setWall(Cell::UP);
+            }
+        }
+    }
+}
+
 uint8_t Board::getWidth()
 {
     return this->width;

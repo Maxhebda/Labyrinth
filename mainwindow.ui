@@ -46,6 +46,7 @@
      <addaction name="actionHorizontal_maze"/>
      <addaction name="actionVertical_maze"/>
      <addaction name="actionSpiral"/>
+     <addaction name="actionStraight_lines"/>
     </widget>
     <addaction name="menuGenerateNew"/>
     <addaction name="menuSzukaj_wyj_cia"/>
@@ -141,6 +142,11 @@
   <action name="actionSpiral">
    <property name="text">
     <string>Spiralny labirynt, cyklony</string>
+   </property>
+  </action>
+  <action name="actionStraight_lines">
+   <property name="text">
+    <string>Proste linie</string>
    </property>
   </action>
  </widget>
