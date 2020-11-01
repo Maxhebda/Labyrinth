@@ -613,20 +613,46 @@ void Board::generateMaze_methodDFS_spiral(uint8_t y, uint8_t x, int8_t directory
 
 void Board::generateMaze_methodStraightLines(uint8_t yStart, uint8_t xStart, uint8_t yEnd, uint8_t xEnd, bool direction)
 {
-    uint8_t y;
     uint8_t hole;
-    if (direction)
+
+     //split horizontally
+    if (direction && xEnd - xStart > 0 && yEnd - yStart > 0)
     {
-        y = yStart + (yEnd - yStart) / 2;
-        hole = rand()%(yStart + (yEnd - yStart)) + 1;
-        for(uint8_t x = xStart; x < xEnd + 1; x++)
+        uint8_t yHalf = (yEnd - yStart) / 2 + yStart;
+        hole = rand()%(xEnd - xStart + 1) + xStart;
+
+        //drawing lines
+        for (uint8_t x = xStart; x < xEnd + 1; x++)
         {
-            if (x != hole)
+            if (x == hole)
             {
-                board[y][x].setWall(Cell::DOWN);
-                board[y+1][x].setWall(Cell::UP);
+                continue;
             }
+            board[yHalf][x].setWall(Cell::DOWN);
+            board[yHalf+1][x].setWall(Cell::UP);
         }
+        generateMaze_methodStraightLines(yStart, xStart, yHalf, xEnd, false);
+        generateMaze_methodStraightLines(yHalf + 1, xStart, yEnd, xEnd, false);
+    }
+
+    //split vertically
+    if (!direction && yEnd - yStart > 0 && xEnd - xStart > 0)
+    {
+        uint8_t xHalf = (xEnd - xStart) / 2 + xStart;
+        hole = rand()%(yEnd - yStart + 1) + yStart;
+
+        //drawing lines
+        for (uint8_t y = yStart; y < yEnd + 1; y++)
+        {
+            if (y == hole)
+            {
+                continue;
+            }
+            board[y][xHalf].setWall(Cell::RIGHT);
+            board[y][xHalf+1].setWall(Cell::LEFT);
+        }
+        generateMaze_methodStraightLines(yStart, xStart, yEnd, xHalf, true);
+        generateMaze_methodStraightLines(yStart, xHalf + 1, yEnd, xEnd, true);
     }
 }
 

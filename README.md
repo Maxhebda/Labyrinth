@@ -13,8 +13,9 @@ finished:
 - [x] menu in several languages (language class)
 - [x] maze size settings window
 - [x] cell skeleton (we work with bits, not bytes)
-- [ ] labyrinth generation algorithm by the method of straight lines
-- [x] labyrinth generation algorithm by DFS method  [Link](https://pl.qwe.wiki/wiki/Depth-first_search)
+- [x] labyrinth generation algorithm by the method of straight lines (division in half)
+- [ ] labyrinth generation algorithm by the method of straight lines (random split)
+- [x] labyrinth generation algorithm by DFS method [Link](https://pl.qwe.wiki/wiki/Depth-first_search)
     - normal maze
     - hozirontal maze
     - vertical maze
@@ -23,7 +24,7 @@ finished:
 - [ ] solving algorithms
 
 Creating algorithms:
- - [ ] Labyrinth generation (straight lines & recursive method) (20% completed)
+ - [ ] Labyrinth generation (straight lines & recursive method) (60% completed)
  - [ ] Solving: Blintfold (right hand)
  - [ ] Solving: Blinfold (left hand)
  - [ ] Solving: Brute Force
@@ -32,8 +33,8 @@ Creating algorithms:
 ---
 tools:
 - QT Creator 4.12.3
-- programming language: c++
-- OS (test): Windows 10 Pro / 64bit
+- programming language: C++
+- OS (test/compilation): Windows 10 Pro / 64bit
 ---
 ### Ways and idea of solution:
 * Description of the ways -> [MicroMouse robots](https://forbot.pl/blog/roboty-micromouse-5-metod-przeszukiwania-labiryntu-id17354)

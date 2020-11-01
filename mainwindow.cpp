@@ -141,7 +141,7 @@ void MainWindow::clickMenuGenerateStraightLine()
     refreshWindowsSize();
     board->clear();
     board->generateFrame();
-    board->generateMaze_methodStraightLines(0, 0, globalY - 1, globalX - 1, true);
+    board->generateMaze_methodStraightLines(0, 0, globalY-1, globalX-1, true);
     drawBoard();
 }
 
@@ -184,7 +184,7 @@ void MainWindow::refreshLanguage()
     ui->actionVertical_maze->setText(language->l("Vertical maze"));
     ui->actionMaze_settings->setText(language->l("Maze settings"));
     ui->actionSpiral->setText(language->l("Spiral maze, cyclones"));
-    ui->actionStraight_lines->setText(language->l("Straight lines"));
+    ui->actionStraight_lines->setText(language->l("Straight lines (division in half)"));
 
     if (ui_mazeSettings!=NULL)
     {
