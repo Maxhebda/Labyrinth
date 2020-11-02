@@ -46,7 +46,8 @@
      <addaction name="actionHorizontal_maze"/>
      <addaction name="actionVertical_maze"/>
      <addaction name="actionSpiral"/>
-     <addaction name="actionStraight_lines"/>
+     <addaction name="actionStraight_lines_division_in_half"/>
+     <addaction name="actionStraight_lines_random_split"/>
     </widget>
     <addaction name="menuGenerateNew"/>
     <addaction name="menuSzukaj_wyj_cia"/>
@@ -144,9 +145,14 @@
     <string>Spiralny labirynt, cyklony</string>
    </property>
   </action>
-  <action name="actionStraight_lines">
+  <action name="actionStraight_lines_division_in_half">
    <property name="text">
     <string>Proste linie (podział na pół)</string>
+   </property>
+  </action>
+  <action name="actionStraight_lines_random_split">
+   <property name="text">
+    <string>Proste linie (losowy podział)</string>
    </property>
   </action>
  </widget>

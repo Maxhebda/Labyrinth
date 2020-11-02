@@ -611,7 +611,7 @@ void Board::generateMaze_methodDFS_spiral(uint8_t y, uint8_t x, int8_t directory
     }
 }
 
-void Board::generateMaze_methodStraightLines(uint8_t yStart, uint8_t xStart, uint8_t yEnd, uint8_t xEnd, bool direction)
+void Board::generateMaze_methodStraightLinesDivisionInHalf(uint8_t yStart, uint8_t xStart, uint8_t yEnd, uint8_t xEnd, bool direction)
 {
     uint8_t hole;
 
@@ -631,8 +631,8 @@ void Board::generateMaze_methodStraightLines(uint8_t yStart, uint8_t xStart, uin
             board[yHalf][x].setWall(Cell::DOWN);
             board[yHalf+1][x].setWall(Cell::UP);
         }
-        generateMaze_methodStraightLines(yStart, xStart, yHalf, xEnd, false);
-        generateMaze_methodStraightLines(yHalf + 1, xStart, yEnd, xEnd, false);
+        generateMaze_methodStraightLinesDivisionInHalf(yStart, xStart, yHalf, xEnd, false);
+        generateMaze_methodStraightLinesDivisionInHalf(yHalf + 1, xStart, yEnd, xEnd, false);
     }
 
     //split vertically
@@ -651,8 +651,69 @@ void Board::generateMaze_methodStraightLines(uint8_t yStart, uint8_t xStart, uin
             board[y][xHalf].setWall(Cell::RIGHT);
             board[y][xHalf+1].setWall(Cell::LEFT);
         }
-        generateMaze_methodStraightLines(yStart, xStart, yEnd, xHalf, true);
-        generateMaze_methodStraightLines(yStart, xHalf + 1, yEnd, xEnd, true);
+        generateMaze_methodStraightLinesDivisionInHalf(yStart, xStart, yEnd, xHalf, true);
+        generateMaze_methodStraightLinesDivisionInHalf(yStart, xHalf + 1, yEnd, xEnd, true);
+    }
+}
+
+void Board::generateMaze_methodStraightLinesRandomSplit(uint8_t yStart, uint8_t xStart, uint8_t yEnd, uint8_t xEnd, bool direction)
+{
+    uint8_t hole;
+
+     //split horizontally
+    if (direction && xEnd - xStart > 0 && yEnd - yStart > 0)
+    {
+        uint8_t yHalf;
+        if (yEnd - yStart > 6)
+        {
+            yHalf = rand()%(yEnd - yStart -2) + yStart + 2;
+        }
+        else
+        {
+            yHalf = (yEnd - yStart) / 2 + yStart;
+        }
+        hole = rand()%(xEnd - xStart + 1) + xStart;
+
+        //drawing lines
+        for (uint8_t x = xStart; x < xEnd + 1; x++)
+        {
+            if (x == hole)
+            {
+                continue;
+            }
+            board[yHalf][x].setWall(Cell::DOWN);
+            board[yHalf+1][x].setWall(Cell::UP);
+        }
+        generateMaze_methodStraightLinesRandomSplit(yStart, xStart, yHalf, xEnd, false);
+        generateMaze_methodStraightLinesRandomSplit(yHalf + 1, xStart, yEnd, xEnd, false);
+    }
+
+    //split vertically
+    if (!direction && yEnd - yStart > 0 && xEnd - xStart > 0)
+    {
+        uint8_t xHalf;
+        if (xEnd - xStart > 6)
+        {
+            xHalf = rand()%(xEnd - xStart - 2) + xStart + 2;
+        }
+        else
+        {
+            xHalf = (xEnd - xStart) / 2 + xStart;
+        }
+        hole = rand()%(yEnd - yStart + 1) + yStart;
+
+        //drawing lines
+        for (uint8_t y = yStart; y < yEnd + 1; y++)
+        {
+            if (y == hole)
+            {
+                continue;
+            }
+            board[y][xHalf].setWall(Cell::RIGHT);
+            board[y][xHalf+1].setWall(Cell::LEFT);
+        }
+        generateMaze_methodStraightLinesRandomSplit(yStart, xStart, yEnd, xHalf, true);
+        generateMaze_methodStraightLinesRandomSplit(yStart, xHalf + 1, yEnd, xEnd, true);
     }
 }
 

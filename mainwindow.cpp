@@ -27,7 +27,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionVertical_maze,SIGNAL(triggered()),this, SLOT(clickMenuGenerateVerticalMaze()));
     connect(ui->actionSpiral,SIGNAL(triggered()),this, SLOT(clickMenuGenerateSpiralMaze()));
     connect(ui->actionMaze_settings,SIGNAL(triggered()),this, SLOT(clickMenuMazeSetings()));
-    connect(ui->actionStraight_lines,SIGNAL(triggered()),this, SLOT(clickMenuGenerateStraightLine()));
+    connect(ui->actionStraight_lines_division_in_half,SIGNAL(triggered()),this, SLOT(clickMenuGenerateStraightLineDivisionInHalf()));
+    connect(ui->actionStraight_lines_random_split,SIGNAL(triggered()),this, SLOT(clickMenuGenerateStraightLineRandomSplit()));
 
     //--- set default language
     language = new Language(Language::Polish);
@@ -136,12 +137,21 @@ void MainWindow::clickMenuGenerateSpiralMaze()
     drawBoard();
 }
 
-void MainWindow::clickMenuGenerateStraightLine()
+void MainWindow::clickMenuGenerateStraightLineDivisionInHalf()
 {
     refreshWindowsSize();
     board->clear();
     board->generateFrame();
-    board->generateMaze_methodStraightLines(0, 0, globalY-1, globalX-1, true);
+    board->generateMaze_methodStraightLinesDivisionInHalf(0, 0, globalY-1, globalX-1, true);
+    drawBoard();
+}
+
+void MainWindow::clickMenuGenerateStraightLineRandomSplit()
+{
+    refreshWindowsSize();
+    board->clear();
+    board->generateFrame();
+    board->generateMaze_methodStraightLinesRandomSplit(0, 0, globalY-1, globalX-1, true);
     drawBoard();
 }
 
@@ -184,7 +194,8 @@ void MainWindow::refreshLanguage()
     ui->actionVertical_maze->setText(language->l("Vertical maze"));
     ui->actionMaze_settings->setText(language->l("Maze settings"));
     ui->actionSpiral->setText(language->l("Spiral maze, cyclones"));
-    ui->actionStraight_lines->setText(language->l("Straight lines (division in half)"));
+    ui->actionStraight_lines_division_in_half->setText(language->l("Straight lines (division in half)"));
+    ui->actionStraight_lines_random_split->setText(language->l("Straight lines (random split)"));
 
     if (ui_mazeSettings!=NULL)
     {
