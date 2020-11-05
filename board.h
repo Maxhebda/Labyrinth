@@ -23,6 +23,7 @@ public:
     void generateMaze_methodDFS_spiral(uint8_t y, uint8_t x, int8_t directory, uint8_t l, uint8_t lmax); //d = 1,2,3,4 right || -1,-2,-3,-4 left  l = step  lmax = lenght arm
     void generateMaze_methodStraightLinesDivisionInHalf(uint8_t yStart, uint8_t xStart, uint8_t yEnd, uint8_t xEnd, bool directory); //d : true : horizontal, false : vertical
     void generateMaze_methodStraightLinesRandomSplit(uint8_t yStart, uint8_t xStart, uint8_t yEnd, uint8_t xEnd, bool directory); //d : true : horizontal, false : vertical
+    void generateMaze_methodZigzags(uint8_t y, uint8_t x, int8_t directory, uint8_t l, uint8_t lmax);
 
 private:
     Cell board[100][200];   //ymax = 100, xmax = 200

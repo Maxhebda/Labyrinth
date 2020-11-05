@@ -14,7 +14,8 @@ finished:
 - [x] maze size settings window
 - [x] cell skeleton (we work with bits, not bytes)
 - [x] labyrinth generation algorithm by the method of straight lines (division in half)
-- [ ] labyrinth generation algorithm by the method of straight lines (random split)
+- [ ] labyrinth generation algorithm by the method of straight lines (random split) (80& complete)
+- [ ] labyrinth generation algorithm - Zigzags method
 - [x] labyrinth generation algorithm by DFS method [Link](https://pl.qwe.wiki/wiki/Depth-first_search)
     - normal maze
     - hozirontal maze

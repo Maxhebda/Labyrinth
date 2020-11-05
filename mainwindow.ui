@@ -45,9 +45,13 @@
      <addaction name="separator"/>
      <addaction name="actionHorizontal_maze"/>
      <addaction name="actionVertical_maze"/>
+     <addaction name="separator"/>
      <addaction name="actionSpiral"/>
+     <addaction name="separator"/>
      <addaction name="actionStraight_lines_division_in_half"/>
      <addaction name="actionStraight_lines_random_split"/>
+     <addaction name="separator"/>
+     <addaction name="actionZigzag"/>
     </widget>
     <addaction name="menuGenerateNew"/>
     <addaction name="menuSzukaj_wyj_cia"/>
@@ -153,6 +157,11 @@
   <action name="actionStraight_lines_random_split">
    <property name="text">
     <string>Proste linie (losowy podział)</string>
+   </property>
+  </action>
+  <action name="actionZigzag">
+   <property name="text">
+    <string>Zigzag</string>
    </property>
   </action>
  </widget>

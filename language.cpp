@@ -59,4 +59,5 @@ void Language::load()
     lData.push_back(Equivalent("Spiral maze, cyclones","Spiralny labirynt, cyklony"));
     lData.push_back(Equivalent("Straight lines (division in half)","Proste linie (podział na pół)"));
     lData.push_back(Equivalent("Straight lines (random split)","Proste linie (losowy podział)"));
+    lData.push_back(Equivalent("Zigzags","Zygzaki"));
 }

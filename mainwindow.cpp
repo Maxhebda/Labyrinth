@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionMaze_settings,SIGNAL(triggered()),this, SLOT(clickMenuMazeSetings()));
     connect(ui->actionStraight_lines_division_in_half,SIGNAL(triggered()),this, SLOT(clickMenuGenerateStraightLineDivisionInHalf()));
     connect(ui->actionStraight_lines_random_split,SIGNAL(triggered()),this, SLOT(clickMenuGenerateStraightLineRandomSplit()));
+    connect(ui->actionZigzag,SIGNAL(triggered()),this, SLOT(clickMenuGenerateZigzags()));
 
     //--- set default language
     language = new Language(Language::Polish);
@@ -155,6 +156,15 @@ void MainWindow::clickMenuGenerateStraightLineRandomSplit()
     drawBoard();
 }
 
+void MainWindow::clickMenuGenerateZigzags()
+{
+    refreshWindowsSize();
+    board->clear();
+    board->generateTheBeginningOfTheLabyrinth();
+    board->generateMaze_methodZigzags(rand()%((globalY / 2)-1)+(globalY / 2),rand()%((globalX / 2)-1)+(globalX / 2),2,0,20);
+    drawBoard();
+}
+
 void MainWindow::clickMenuMazeSetings()
 {
     if (ui_mazeSettings->isChangeOfSettings())
@@ -196,6 +206,7 @@ void MainWindow::refreshLanguage()
     ui->actionSpiral->setText(language->l("Spiral maze, cyclones"));
     ui->actionStraight_lines_division_in_half->setText(language->l("Straight lines (division in half)"));
     ui->actionStraight_lines_random_split->setText(language->l("Straight lines (random split)"));
+    ui->actionZigzag->setText(language->l("Zigzags"));
 
     if (ui_mazeSettings!=NULL)
     {

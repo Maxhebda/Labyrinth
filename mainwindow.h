@@ -60,5 +60,6 @@ private slots:
     void clickMenuGenerateSpiralMaze();
     void clickMenuGenerateStraightLineDivisionInHalf();
     void clickMenuGenerateStraightLineRandomSplit();
+    void clickMenuGenerateZigzags();
 };
 #endif // MAINWINDOW_H
